@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, BookOpen, Users, GraduationCap, Building2 } from "lucide-react";
+import SolutionDropdown from "./SolutionDropdown";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,12 +10,8 @@ const Navigation = () => {
 
   const navItems = [
     { name: "Trang chủ", href: "/", icon: BookOpen },
-    { name: "Cho Giáo viên", href: "/teachers", icon: Users },
-    { name: "Cho Học sinh", href: "/students", icon: GraduationCap },
-    { name: "Cho Trường học", href: "/schools", icon: Building2 },
+    { name: "Giải pháp", href: "/teachers", icon: Users },
     { name: "Về chúng tôi", href: "/about" },
-    { name: "Blog", href: "/blog" },
-    { name: "FAQ", href: "/faq" },
     { name: "Liên hệ", href: "/contact" },
   ];
 
@@ -33,40 +30,42 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navItems.slice(0, 4).map((item) => {
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center space-x-1 ${
-                    location.pathname === item.href
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                  }`}
-                >
-                  {Icon && <Icon className="w-4 h-4" />}
-                  <span>{item.name}</span>
-                </Link>
-              );
-            })}
-            
-            <div className="flex items-center space-x-1 ml-4">
-              {navItems.slice(4).map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    location.pathname === item.href
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-primary"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
+          <div className="hidden md:flex items-center space-x-8">
+            <Link
+              to="/"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center space-x-1 ${
+                location.pathname === "/"
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+              }`}
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>Trang chủ</span>
+            </Link>
+
+            <SolutionDropdown />
+
+            <Link
+              to="/about"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                location.pathname === "/about"
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-primary"
+              }`}
+            >
+              Về chúng tôi
+            </Link>
+
+            <Link
+              to="/contact"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                location.pathname === "/contact"
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-primary"
+              }`}
+            >
+              Liên hệ
+            </Link>
           </div>
 
           {/* CTA Buttons */}
@@ -94,24 +93,74 @@ const Navigation = () => {
         {isOpen && (
           <div className="md:hidden py-4 border-t border-border">
             <div className="space-y-2">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                      location.pathname === item.href
-                        ? "text-primary bg-primary/10"
-                        : "text-muted-foreground hover:text-primary hover:bg-primary/5"
-                    }`}
-                  >
-                    {Icon && <Icon className="w-5 h-5" />}
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
+              <Link
+                to="/"
+                onClick={() => setIsOpen(false)}
+                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  location.pathname === "/"
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                }`}
+              >
+                <BookOpen className="w-5 h-5" />
+                <span>Trang chủ</span>
+              </Link>
+
+              {/* Mobile Solutions */}
+              <div className="space-y-1">
+                <div className="px-3 py-2 text-sm font-medium text-muted-foreground">
+                  Giải pháp
+                </div>
+                <Link
+                  to="/teachers"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center space-x-2 px-6 py-2 rounded-md text-base font-medium transition-colors text-muted-foreground hover:text-primary hover:bg-primary/5"
+                >
+                  <Users className="w-5 h-5" />
+                  <span>Cho Giáo viên</span>
+                </Link>
+                <Link
+                  to="/students"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center space-x-2 px-6 py-2 rounded-md text-base font-medium transition-colors text-muted-foreground hover:text-primary hover:bg-primary/5"
+                >
+                  <GraduationCap className="w-5 h-5" />
+                  <span>Cho Học sinh</span>
+                </Link>
+                <Link
+                  to="/schools"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center space-x-2 px-6 py-2 rounded-md text-base font-medium transition-colors text-muted-foreground hover:text-primary hover:bg-primary/5"
+                >
+                  <Building2 className="w-5 h-5" />
+                  <span>Cho Trường học</span>
+                </Link>
+              </div>
+
+              <Link
+                to="/about"
+                onClick={() => setIsOpen(false)}
+                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  location.pathname === "/about"
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                }`}
+              >
+                <span>Về chúng tôi</span>
+              </Link>
+
+              <Link
+                to="/contact"
+                onClick={() => setIsOpen(false)}
+                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                  location.pathname === "/contact"
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+                }`}
+              >
+                <span>Liên hệ</span>
+              </Link>
+
               <div className="pt-4 space-y-2">
                 <Button variant="ghost" className="w-full justify-start">
                   Đăng nhập
