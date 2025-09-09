@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, BookOpen, Users, GraduationCap, Building2 } from "lucide-react";
-import SolutionDropdown from "./SolutionDropdown";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,7 +42,41 @@ const Navigation = () => {
               <span>Trang chủ</span>
             </Link>
 
-            <SolutionDropdown />
+            <Link
+              to="/teachers"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center space-x-1 ${
+                location.pathname === "/teachers"
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+              }`}
+            >
+              <Users className="w-4 h-4" />
+              <span>Cho Giáo viên</span>
+            </Link>
+
+            <Link
+              to="/students"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center space-x-1 ${
+                location.pathname === "/students"
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+              }`}
+            >
+              <GraduationCap className="w-4 h-4" />
+              <span>Cho Học sinh</span>
+            </Link>
+
+            <Link
+              to="/schools"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center space-x-1 ${
+                location.pathname === "/schools"
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/5"
+              }`}
+            >
+              <Building2 className="w-4 h-4" />
+              <span>Cho Trường học</span>
+            </Link>
 
             <Link
               to="/about"
