@@ -30,6 +30,7 @@ const SolutionDropdown = () => {
     <div className="relative" onMouseLeave={() => setIsOpen(false)}>
       <button
         onMouseEnter={() => setIsOpen(true)}
+        onClick={() => setIsOpen(!isOpen)}
         className="px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center space-x-1 text-muted-foreground hover:text-primary hover:bg-primary/5"
       >
         <Users className="w-4 h-4" />
