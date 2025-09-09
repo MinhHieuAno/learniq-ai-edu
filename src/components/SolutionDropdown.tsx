@@ -27,9 +27,12 @@ const SolutionDropdown = () => {
   ];
 
   return (
-    <div className="relative" onMouseLeave={() => setIsOpen(false)}>
+    <div className="relative">
       <button
         onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => {
+          setTimeout(() => setIsOpen(false), 150);
+        }}
         onClick={() => setIsOpen(!isOpen)}
         className="px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center space-x-1 text-muted-foreground hover:text-primary hover:bg-primary/5"
       >
@@ -42,6 +45,7 @@ const SolutionDropdown = () => {
         <div 
           className="absolute top-full left-0 mt-2 w-80 bg-background border border-border rounded-lg shadow-elegant z-50"
           onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
         >
           <div className="p-4 space-y-2">
             {solutions.map((solution, index) => {
